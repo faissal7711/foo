@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/widgets/main_drawer.dart';
+import '../conestants.dart';
+import '../services/theme.dart';
 import 'categories_screen.dart';
 import 'favorites.dart';
+import 'revision/revision_test_screen.dart';
 
 class TabsScreen extends StatefulWidget {
+  static const routeName = '/tabs_screen';
+  static int routeIndex;
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
+//  var currentPage = DrawerSection.
   final List<Map<String, Object>> _page = [
     {
       'page': CategoriesScreen(),
-      'title': 'Categories',
+      'title': 'المنهج',
     },
     {
-      'page': Favorites(),
-      'title': 'Favorites',
+      'page': RevisionTestScreen(),
+      'title': 'المراجعه',
     },
   ];
   int _selectPageIndex = 0;
+
   void _selectPage(int value) {
     setState(() {
       _selectPageIndex = value;
@@ -29,28 +37,40 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+//      backgroundColor: Theme.of(context).primaryColor,
       drawer: MainDrawer(),
       appBar: AppBar(
-        title: Text(_page[_selectPageIndex]['title']),
+        title: Text(
+          _page[_selectPageIndex]['title'],
+          style: StyleTitle,
+        ),
+//        leading: Icon(Icons.menu,),
       ),
-      body: _page[_selectPageIndex]['page'],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).canvasColor,
-        unselectedItemColor: Theme.of(context).accentColor,
-        currentIndex: _selectPageIndex,
-        onTap: _selectPage,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            title: Text('categories'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            title: Text('favorites'),
-          ),
-        ],
-        backgroundColor: Theme.of(context).primaryColor,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: purpleColor,
+//        color: Theme.of(context).primaryColor.withOpacity(0),
+        child: _page[TabsScreen.routeIndex]['page'],
       ),
+//      bottomNavigationBar: BottomNavigationBar(
+//        selectedFontSize: 20,
+//        backgroundColor: purpleColor,
+//        selectedItemColor: Theme.of(context).colorScheme.primary,
+//        unselectedItemColor: KTextColor.shade300,
+//        currentIndex: TabsScreen.routeIndex,
+//        onTap: _selectPage,
+//        items: [
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.local_library, size: 25),
+//            label: 'المنهج',
+//          ),
+//          BottomNavigationBarItem(
+//            icon: Icon(Icons.description, size: 25),
+//            label: 'المراجعه',
+//          ),
+//        ],
+//      ),
     );
   }
 }

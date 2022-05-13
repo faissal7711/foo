@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'components/quiz_page.dart';
+import 'components/quiz_score.dart';
+import 'conestants.dart';
+import 'home.dart';
+import 'home_page.dart';
+import 'screens/belady/belady_main_screen.dart';
+import 'screens/belady/belady_short_vedio_screen.dart';
+import 'screens/belady/belady_test_screen.dart';
+import 'screens/belady/lesson_belady_screen.dart';
 import 'screens/categories_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/filters_screen.dart';
+import 'screens/new_year/new_year_main_screen.dart';
+import 'screens/new_year/new_year_screen.dart';
+import 'screens/lesson_screen.dart';
 import 'screens/meal_detail_screen.dart';
+import 'screens/new_year/new_year_test_screen.dart';
+import 'screens/new_year/new_year_vedio_screen.dart';
+import 'screens/qanatir/lesson_qanatir_screen.dart';
+import 'screens/qanatir/qanatir_main_screen.dart';
+import 'screens/qanatir/qanatir_test_screen.dart';
+import 'screens/qanatir/qanatir_vedio_screen.dart';
+import 'screens/revision/revision_test_screen.dart';
+import 'screens/school_library/library_main_screen.dart';
+import 'screens/school_library/library_screen.dart';
+import 'screens/school_library/library_test_screen.dart';
+import 'screens/school_library/library_vedio_screen.dart';
 import 'screens/tabs_screen.dart';
+import 'screens/vedio_screen.dart';
+import 'testing.dart';
+
+// https://youtu.be/uSeCmFyRn4Y  فيديو عام جديد
 
 void main() => runApp(MyApp());
 
@@ -12,17 +39,52 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale("ar", "EG"),
+      ],
+      locale: const Locale("ar", "EG"),
       routes: {
-        '/': (context) => TabsScreen(),
+//        '/': (context) => TabsScreen(),
+        TabsScreen.routeName: (context) => TabsScreen(),
         CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(),
+        CategoriesScreen.routeName: (context) => CategoriesScreen(),
+        RevisionTestScreen.routeName: (context) => RevisionTestScreen(),
         MealDetailScreen.routeName: (context) => MealDetailScreen(),
-        FiltersScreen.routeName: (context) => FiltersScreen(),
+        VideoScreen.routeName: (context) => VideoScreen(),
+
+        LibraryTestScreen.routeName: (context) => LibraryTestScreen(),
+        NewYearTestScreen.routeName: (context) => NewYearTestScreen(),
+        BeladyTestScreen.routeName: (context) => BeladyTestScreen(),
+        QanatirTestScreen.routeName: (context) => QanatirTestScreen(),
+
+        QuizScore.routeName: (context) => QuizScore(),
+        QuizImage.routeName: (context) => QuizImage(),
+
+        NewYearMainScreen.routeName: (context) => NewYearMainScreen(),
+//        NewYearVideoScreen.routeName: (context) => NewYearVideoScreen(),
+        LessonNewYearScreen.routeName: (context) => LessonNewYearScreen(),
+
+//        LibraryVideoScreen.routeName: (context) => LibraryVideoScreen(),
+        LibraryMainScreen.routeName: (context) => LibraryMainScreen(),
+        LessonLibraryScreen.routeName: (context) => LessonLibraryScreen(),
+
+        LessonQanatirScreen.routeName: (context) => LessonQanatirScreen(),
+        QanatirMainScreen.routeName: (context) => QanatirMainScreen(),
+//        QanatirVideoScreen.routeName: (context) => QanatirVideoScreen(),
+
+        BeladyMainScreen.routeName: (context) => BeladyMainScreen(),
+//        BeladyShortVideoScreen.routeName: (context) => BeladyShortVideoScreen(),
+        LessonBeladyScreen.routeName: (context) => LessonBeladyScreen(),
+//        BeladyVideoScreen.routeName: (context) => BeladyVideoScreen(),
       },
       title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.deepOrange,
-          accentColor: Colors.amber,
           canvasColor: Color.fromRGBO(255, 254, 229, 1.0),
           textTheme: ThemeData.light().textTheme.copyWith(
                 bodyText1: TextStyle(
@@ -35,31 +97,15 @@ class MyApp extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              )),
+              ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: KMainColor)
+              .copyWith(secondary: KSecondaryColor)),
+//      home: TabsScreen(),
 //      home: CategoriesScreen(),
-//      home: MyHomePage(title: 'Flutter Demo Home Page'),
+//      home: HomePage(),
+      home: Home(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: CategoriesScreen(),
-    );
-  }
-}
-// the second test for git
+// واصفر فاقع للخلفية احمر لون اساسي للكلام

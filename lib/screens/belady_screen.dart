@@ -1,8 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:meal_app/dummy_data.dart';
 
-class MealDetailScreen extends StatelessWidget {
-  static const routeName = 'meal_detail';
+class BeladyScreen extends StatelessWidget {
+  static const routeName = 'belady_detail';
 
   Widget buildSectionTitle(BuildContext ctx, String text) {
     return Container(

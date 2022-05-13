@@ -3,6 +3,8 @@ import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/widgets/meal_item.dart';
 
 import '../dummy_data.dart';
+import '../services/theme.dart';
+import 'vedio_screen.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   static const routeName = 'category_meals';
@@ -11,7 +13,7 @@ class CategoryMealsScreen extends StatefulWidget {
 }
 
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
-  String categoryTitle;
+//  String categoryTitle;
   List<Meal> categoryMeals;
 
   void removeMeal(String mealId) {
@@ -23,11 +25,11 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   @override
   void didChangeDependencies() {
     final routArg =
-    ModalRoute.of(context).settings.arguments as Map<String, String>;
-    final categoryId = routArg['id'];
-    categoryTitle = routArg['title'];
+    ModalRoute.of(context).settings.arguments as String;
+//    final categoryId = routArg['id'];
+//    categoryTitle = routArg['title'];
     categoryMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(categoryId);
+      return meal.categories.contains(routArg);
     }).toList();
     super.didChangeDependencies();
   }
@@ -36,19 +38,27 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: purpleColor,
       appBar: AppBar(
-        title: Text(categoryTitle),
+        title: Text('المهن'),
       ),
       body: ListView.builder(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         itemBuilder: (ctx, index) {
-          return MealItem(
-            id: categoryMeals[index].id,
-            imageURL: categoryMeals[index].imageUrl,
-            title: categoryMeals[index].title,
-            duration: categoryMeals[index].duration,
-            complexity: categoryMeals[index].complexity,
-            affordability: categoryMeals[index].affordability,
-            removeItem: removeMeal,
+          return InkWell(
+            onTap: () {
+              VideoScreen.url = categoryMeals[index].id;
+              Navigator.of(context).pushNamed(VideoScreen.routeName);
+            },
+            child: MealItem(
+              id: categoryMeals[index].id,
+              imageURL: 'assets/images/belady_job_${index+1}.jpg',
+              title: categoryMeals[index].title,
+//              duration: categoryMeals[index].duration,
+//              complexity: categoryMeals[index].complexity,
+//              affordability: categoryMeals[index].affordability,
+//              removeItem: removeMeal,
+            ),
           );
         },
         itemCount: categoryMeals.length,
